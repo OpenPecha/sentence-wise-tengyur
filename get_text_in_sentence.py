@@ -8,6 +8,7 @@ def preprocess_text(text):
     patterns = [
         ['〔.+〕', ''],
         ['\{D.+\}', ''],
+        ['\{T.+\}', ''],
         ['#', '']
 
     ]
@@ -24,10 +25,10 @@ def get_text_in_sentence(text):
     return tokenized_text
 
 if __name__ == "__main__":
-    text_paths = list(Path('./data/tengyur_text').iterdir())
+    text_paths = list(Path('./data/canons/kangyur_text').iterdir())
     text_paths.sort()
     for text_path in text_paths:
         text_id = text_path.stem
         text = text_path.read_text(encoding='utf-8')
         sentence_wise_text = get_text_in_sentence(text)
-        Path(f'./data/sentence_wise/{text_id}.txt').write_text(sentence_wise_text, encoding='utf-8')
+        Path(f'./data/sentence_wise/kangyur/{text_id}.txt').write_text(sentence_wise_text, encoding='utf-8')
